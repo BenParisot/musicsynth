@@ -6,23 +6,67 @@ testInstance instanceof AudioSynth; // true
 
 testInstance === Synth; // true
 
+//instrumets
 var piano = Synth.createInstrument('piano');
+var acoustic = Synth.createInstrument('acoustic');
+var organ = Synth.createInstrument('organ');
+var edm = Synth.createInstrument('edm');
 
-var randomNotes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
+//scales
+var scaleChromatic = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; // (random, atonal: all twelve note
+var scaleMajor = ['C', 'D', 'E', 'F', 'G', 'A', 'B']; // (classic, happy)
+var scaleHarmonicMinor = ['C', 'C#', 'D#', 'F', 'F#', 'A', 'A#']; // (haunting, creepy)
+var scaleMinorPentatonic = ['D', 'E', 'F#', 'A', 'B']; // (blues, rock)
+var scaleNaturalMinor = ['C#', 'D', 'E', 'F#', 'G', 'A', 'B']; // (scary, epic)
+var scaleMelodicMinorUp = ['C#', 'D', 'E', 'F#', 'G#', 'A#', 'B']; // (wistful, mysterious)
+var scaleMelodicMinorDown = ['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B'];  // (sombre, soulful)
+var scaleDorian = ['C#', 'D', 'E', 'F#', 'G#', 'A', 'B']; // (cool, jazzy)
+var scaleMixolydian = ['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B']; // (progressive, complex)
+var scaleAhavaRaba = ['C', 'D#', 'E', 'F#', 'G', 'A', 'B']; // (exotic, unfamiliar)
+var scaleMajorPentatonic = ['C#', 'D#', 'F#', 'G#', 'B']; // (country, gleeful)
+var scaleDiatonic = ['C#', 'D#', 'F', 'G', 'A', 'B']; // (bizarre, symmetrical)
+
+//melodies
+
+var lineOne = [];
+var lineTwo = [];
+var lineThree = [];
 
 
-function playNotes()  {
-		var randomNote = randomNotes[Math.floor(Math.random()*randomNotes.length)];
-		piano.play(randomNote, 4);
-		console.log(randomNote);
+// function playNotes()  {
+// 		var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
+// 		piano.play(randomNote, 3, 2);
+// 		console.log(randomNote);
+//
+// }
+//
+// function repeatSlow(func, times) {
+// 	 setTimeout(function() {
+// 			 func();
+// 			 --times && repeat(func, times);
+// 	 }, 200);
+//
+// }
+
+function repeat(func, times) {
+			 func();
+			 --times && repeat(func, times);
 
 }
 
-function repeat(func, times) {
+function gatherNotes() {
+	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
+	lineOne.push(randomNote);
+	lineTwo.push(randomNote);
+	lineThree.push(randomNote);
+}
+
+function repeatSlow(func, times) {
 	 setTimeout(function() {
 			 func();
 			 --times && repeat(func, times);
-	 }, 1000);
+	 }, 200);
 
 }
 
@@ -34,10 +78,22 @@ function repeat(func, times) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(playNotes, 5);
+		repeat(gatherNotes, 10);
+		// setTimeout(function() {
+		// lineOne.forEach(function(element) {
+		// 		console.log(element);
+		// 	});
+		// }, 2000);
 
-	});
+	(function theLoop (i) {
+  	setTimeout(function () {
+			console.log(element);
+    		if (--i) {          // If i > 0, keep going
+      		theLoop(i);       // Call the loop again, and pass it the current value of i
+    		}
+  		}, 1000);
+		})(3);
 
-
+});
 
 });
