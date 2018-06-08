@@ -13,19 +13,19 @@ var randomNotes = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 function playNotes()  {
 		var randomNote = randomNotes[Math.floor(Math.random()*randomNotes.length)];
-		piano.play(randomNote, 4, 1);
+		piano.play(randomNote, 4);
 		console.log(randomNote);
 
 }
 
-function playWait() {
-	setTimeout(playNotes, 1000);
-}
-//
 function repeat(func, times) {
-   func();
-   --times && repeat(func, times);
+	 setTimeout(function() {
+			 func();
+			 --times && repeat(func, times);
+	 }, 1000);
+
 }
+
 
 
 
@@ -34,9 +34,7 @@ function repeat(func, times) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(playWait, 5);
-		// playWait();
-
+		repeat(playNotes, 5);
 
 	});
 
