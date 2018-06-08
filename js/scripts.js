@@ -33,13 +33,8 @@ var lineOne = [];
 var lineTwo = [];
 var lineThree = [];
 
+var lineAll = [];
 
-// function playNotes()  {
-// 		var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
-// 		piano.play(randomNote, 3, 2);
-// 		console.log(randomNote);
-//
-// }
 //
 // function repeatSlow(func, times) {
 // 	 setTimeout(function() {
@@ -55,12 +50,21 @@ function repeat(func, times) {
 
 }
 
-function gatherNotes() {
+function gatherNotesOne() {
 	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineOne.push(randomNote);
+}
+
+function gatherNotesTwo() {
+	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineTwo.push(randomNote);
+}
+
+function gatherNotesThree() {
+	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineThree.push(randomNote);
 }
+
 
 function repeatSlow(func, times) {
 	 setTimeout(function() {
@@ -74,7 +78,7 @@ function playMelody(melody) {
 	(function theLoop (i) {
 		setTimeout(function () {
 			piano.play(melody[i], 3, 1);
-			console.log(lineOne[i]);
+			console.log(melody[i]);
 				if (--i) {          // If i > 0, keep going
 					theLoop(i);       // Call the loop again, and pass it the current value of i
 				}
@@ -88,8 +92,15 @@ function playMelody(melody) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(gatherNotes, 5);
-		playMelody(lineOne);
+		repeat(gatherNotesOne, 5);
+		repeat(gatherNotesTwo, 5);
+		repeat(gatherNotesThree, 5);
+		var lineAll = [lineOne, lineTwo, lineOne, lineThree];
+		// playMelody(lineOne);
+		console.log(lineOne);
+		console.log(lineTwo);
+		console.log(lineThree);
+		playMelody(lineTwo);
 
 
 	// (function theLoop (i) {
