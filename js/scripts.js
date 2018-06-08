@@ -70,7 +70,17 @@ function repeatSlow(func, times) {
 
 }
 
-
+function playMelody(melody) {
+	(function theLoop (i) {
+		setTimeout(function () {
+			piano.play(melody[i], 3, 1);
+			console.log(lineOne[i]);
+				if (--i) {          // If i > 0, keep going
+					theLoop(i);       // Call the loop again, and pass it the current value of i
+				}
+			}, 200);
+		})(melody.length-1);
+}
 
 
 
@@ -78,19 +88,19 @@ function repeatSlow(func, times) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(gatherNotes, 10);
+		repeat(gatherNotes, 5);
+		playMelody(lineOne);
 
 
-
-	(function theLoop (i) {
-  	setTimeout(function () {
-			piano.play(lineOne[i], 3, 1);
-			console.log(lineOne[i]);
-    		if (--i) {          // If i > 0, keep going
-      		theLoop(i);       // Call the loop again, and pass it the current value of i
-    		}
-  		}, 1000);
-		})(lineOne.length-1);
+	// (function theLoop (i) {
+  // 	setTimeout(function () {
+	// 		piano.play(lineOne[i], 3, 1);
+	// 		console.log(lineOne[i]);
+  //   		if (--i) {          // If i > 0, keep going
+  //     		theLoop(i);       // Call the loop again, and pass it the current value of i
+  //   		}
+  // 		}, 200);
+	// 	})(lineOne.length-1);
 
 });
 
