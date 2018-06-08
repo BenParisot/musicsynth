@@ -79,20 +79,18 @@ $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
 		repeat(gatherNotes, 10);
-		// setTimeout(function() {
-		// lineOne.forEach(function(element) {
-		// 		console.log(element);
-		// 	});
-		// }, 2000);
+
+
 
 	(function theLoop (i) {
   	setTimeout(function () {
-			console.log(element);
+			piano.play(lineOne[i], 3, 1);
+			console.log(lineOne[i]);
     		if (--i) {          // If i > 0, keep going
       		theLoop(i);       // Call the loop again, and pass it the current value of i
     		}
   		}, 1000);
-		})(3);
+		})(lineOne.length-1);
 
 });
 
