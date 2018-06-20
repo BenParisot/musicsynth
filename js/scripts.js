@@ -52,17 +52,17 @@ function repeat(func, times) {
 }
 
 function gatherNotesOne() {
-	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
+	var randomNote = scaleMajor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineOne.push(randomNote);
 }
 
 function gatherNotesTwo() {
-	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
+	var randomNote = scaleMajor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineTwo.push(randomNote);
 }
 
 function gatherNotesThree() {
-	var randomNote = scaleNaturalMinor[Math.floor(Math.random()*scaleNaturalMinor.length)];
+	var randomNote = scaleMajor[Math.floor(Math.random()*scaleNaturalMinor.length)];
 	lineThree.push(randomNote);
 }
 
@@ -79,7 +79,7 @@ function playMelody(melody) {
 	(function theLoop (i) {
 		setTimeout(function () {
 			piano.play(melody[i], 3, 2);
-			// console.log(melody[i]);
+			console.log(melody[i]);
 				if (--i) {          // If i > 0, keep going
 					theLoop(i);       // Call the loop again, and pass it the current value of i
 				}
@@ -88,18 +88,7 @@ function playMelody(melody) {
 		})(melody.length-1);
 }
 
-// function playFourMeasures(measures) {
-// 	(function melodyLoop (i) {
-// 		setTimeout(function () {
-// 			piano.play(measures[i], 3, 1);
-// 			if (--i) {
-// 				playFourMeasures(i);
-// 			}
-// 		}, 200);
-// 	})(measures.length-1);
-//
-//
-// }
+
 
 
 
@@ -107,16 +96,21 @@ function playMelody(melody) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(gatherNotesOne, 4);
+		repeat(gatherNotesOne, 5);
 		repeat(gatherNotesTwo, 4);
-		repeat(gatherNotesThree, 5);
+		repeat(gatherNotesThree, 4);
 		var lineOneString = lineOne.toString();
 		var lineTwoString = lineTwo.toString();
 		var lineThreeString = lineThree.toString();
-		var lineAll = (lineOneString + "," + lineTwoString + "," + lineOneString + "," + lineThreeString);
+		var lineAll = (lineThreeString + "," + lineTwoString + "," + lineThreeString + "," + lineOneString);
 		var fullMelody = lineAll.split(",");
 		console.log(fullMelody);
-		playMelody(fullMelody);
+		var number = 1;
+		while (number <= 2) {
+    setInterval(playMelody(fullMelody)
+    number++;
+}
+		// playMelody(fullMelody);
 		// playMelody(lineOne);
 
 		// playMelody(lineAll);
