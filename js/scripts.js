@@ -35,6 +35,7 @@ var lineThree = [];
 
 var lineAll = [];
 
+var melodyPause = [800, 300, 800, 300, 800, 300, 800, 300, 800, 300, 800, 300, 800, 300, 800, 300, 800];
 //
 // function repeatSlow(func, times) {
 // 	 setTimeout(function() {
@@ -77,14 +78,28 @@ function repeatSlow(func, times) {
 function playMelody(melody) {
 	(function theLoop (i) {
 		setTimeout(function () {
-			piano.play(melody[i], 3, 1);
-			console.log(melody[i]);
+			piano.play(melody[i], 3, 2);
+			// console.log(melody[i]);
 				if (--i) {          // If i > 0, keep going
 					theLoop(i);       // Call the loop again, and pass it the current value of i
 				}
-			}, 200);
+			}, melodyPause.pop());
+
 		})(melody.length-1);
 }
+
+// function playFourMeasures(measures) {
+// 	(function melodyLoop (i) {
+// 		setTimeout(function () {
+// 			piano.play(measures[i], 3, 1);
+// 			if (--i) {
+// 				playFourMeasures(i);
+// 			}
+// 		}, 200);
+// 	})(measures.length-1);
+//
+//
+// }
 
 
 
@@ -92,15 +107,20 @@ function playMelody(melody) {
 $(document).ready(function() {
 	$("#play").click(function(event) {
 		event.preventDefault();
-		repeat(gatherNotesOne, 5);
-		repeat(gatherNotesTwo, 5);
+		repeat(gatherNotesOne, 4);
+		repeat(gatherNotesTwo, 4);
 		repeat(gatherNotesThree, 5);
-		var lineAll = [lineOne, lineTwo, lineOne, lineThree];
+		var lineOneString = lineOne.toString();
+		var lineTwoString = lineTwo.toString();
+		var lineThreeString = lineThree.toString();
+		var lineAll = (lineOneString + "," + lineTwoString + "," + lineOneString + "," + lineThreeString);
+		var fullMelody = lineAll.split(",");
+		console.log(fullMelody);
+		playMelody(fullMelody);
 		// playMelody(lineOne);
-		console.log(lineOne);
-		console.log(lineTwo);
-		console.log(lineThree);
-		playMelody(lineTwo);
+
+		// playMelody(lineAll);
+
 
 
 	// (function theLoop (i) {
